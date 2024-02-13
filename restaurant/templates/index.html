@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Stock Report - Index{% endblock %}
+{% block header %}<h1>Stock Details</h1>{% endblock %}
+{% block content %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <div class="container mt-5">
+        <table class="table card-table">
+            <thead>
+                <tr>
+                    <th>Item name</th>
+                    <th>Item ID</th>
+                    <th>Amount</th>
+                    <th>Bought from</th>
+                    <th>Bought on</th>
+                    <th>Price (€)</th>
+                    <th>Ref no.</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in data %}
+                    <tr class="card-row">
+                        <td>{{ result.itemname }}</td>
+                        <td>{{ result.id }}</td>
+                        <td>{{ result.amount }}</td>
+                        <td>{{ result.bought_from }}</td>
+                        <td>{{ result.bought_on }}</td>
+                        <td>{{ result.price }}</td>
+                        <td>{{ result.ref }}</td>
+                        <td class="action-buttons">
+                            <a href="Edit/{{ result.id }}" class="edit-button">Edit</a>
+                            <a href="/Delete/{{ result.id }}" class="delete-button" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-container text-center">
+            <a href="{% url 'form_display' %}" class="btn btn-primary add-button">Add Item</a>
+        </div>
+    </div>
+
+{% endblock %}

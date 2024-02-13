@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Stock Report - Index{% endblock %}
+{% block header %}<h1>Add Item</h1>{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <body>
+        
+        <main>
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">Back to Home</a>
+            <br>
+            <form method="POST" class="styled-form">
+                {% csrf_token %}
+                <br>
+                <table border="1" class="styled-table table">
+                    <tr>
+                        <th>Item name</th>
+                        <td><input type="text" placeholder="Enter item name" name="itemname" class="styled-input form-control"></td>
+                    </tr>
+                    <tr>
+                        <th>Amount</th>
+                        <td>
+                            <select name="amount" class="styled-select form-control">
+                                <option selected disabled="true">-- Select amount --</option>
+                                <option>5 units</option>
+                                <option>10 units</option>
+                                <option>15 units</option>
+                                <option>20 units</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Bought from</th>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="bought_from" value="vendor1" id="vendor1" class="styled-radio form-check-input">
+                                <label for="vendor1" class="styled-radio-label form-check-label">vendor1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="bought_from" value="vendor2" id="vendor2" class="styled-radio form-check-input">
+                                <label for="vendor2" class="styled-radio-label form-check-label">vendor2</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Bought on</th>
+                        <td><input type="date" name="bought_on" class="styled-input form-control"></td>
+                    </tr>
+                    <tr>
+                        <th>Price (in €)</th>
+                        <td><input type="number" name="price" class="styled-input form-control"></td>
+                    </tr>
+                    <tr>
+                        <th>Ref no.</th>
+                        <td><input type="text" placeholder="Enter ref no." name="ref" class="styled-input form-control"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Add" class="styled-submit btn btn-primary">
+                            {% if messages %}
+                                {% for mess in messages %}
+                                    <b>{{mess}}</b>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">Show Item List</a>
+        </main>
+    </body>
+</html>
+{% endblock %}
